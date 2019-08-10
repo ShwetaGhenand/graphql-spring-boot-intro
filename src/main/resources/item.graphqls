@@ -1,0 +1,74 @@
+type Item {
+    id: ID!
+    itemName: String!
+    itemBrand: String!
+    itemCategory: String
+    productDetails:ProductDetails
+
+
+}
+
+type ProductDetails {
+    id: ID!
+    productDescription: String!
+    productQuantity: String
+
+}
+
+type SigninPayload {
+    token: String
+    user: User
+}
+
+type User {
+    id: ID!
+    userName: String!
+    email: String
+    password: String
+    token:String
+}
+
+type Query {
+    items:[Item]
+    item(id:Long!):Item
+    productDetails:[ProductDetails]
+    productDetail(id:Long!):ProductDetails
+
+
+}
+
+type Mutation {
+    createItem(input:CreateItemDto!) : Item!
+    updateItem(input:UpdateItemDto!):Item!
+    deleteItem(id: Long!): Long!
+    createProductDetails(input:CreateProductDetailsDto):ProductDetails!
+    signinUser(auth: AuthData): SigninPayload!
+
+}
+
+input CreateItemDto{
+    itemName: String!
+    itemBrand: String!
+    itemCategory: String
+    productDetailsId:Long
+
+}
+
+input UpdateItemDto{
+    id: ID!
+    itemName: String
+    itemBrand: String
+    itemCategory: String
+
+}
+
+input CreateProductDetailsDto{
+    productDescription: String!
+    productQuantity: String
+
+}
+
+input AuthData {
+    email: String!
+    password: String!
+}
